@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   attack: 2
-  attackInterval: 0.2
+  attackInterval: 0.3
   attackRange: 3
   attackSpeed: 10
   attackLayer:

@@ -41,7 +41,8 @@ public class Hero : MonoBehaviour
     {
         if (_target == null) return;
 
-        Projectile projectile = Instantiate(_projectile, transform);
+        // Projectile projectile = Instantiate(_projectile, transform);
+        Projectile projectile = GameManager.Instance.ObjectPool.Get<Projectile>("Projectile");
         projectile.Shoot(_data.attack, _data.attackSpeed, transform, _target);
     }
 

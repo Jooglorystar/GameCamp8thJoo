@@ -15,13 +15,15 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public int EnemyHealth { get; private set; }
 
+    public bool IsDead => EnemyHealth <= 0;
+
     private void Awake()
     {
         if (_rb == null)
         {
             _rb = GetComponent<Rigidbody2D>();
         }
-        if(_healthBar == null)
+        if (_healthBar == null)
         {
             _healthBar = GetComponentInChildren<UiHealthBar>();
         }

@@ -21,6 +21,11 @@ public class Projectile : MonoBehaviour
         Vector3 direction = ((MonoBehaviour)_target).transform.position - transform.position;
         direction.Normalize();
         transform.position += direction * _speed * Time.deltaTime;
+
+        if(_target.IsDead)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +33,7 @@ public class Projectile : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             _target.TakeDamage(_damage);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

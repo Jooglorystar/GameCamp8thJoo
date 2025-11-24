@@ -26,7 +26,8 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>();
+        // Enemy enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemy = GameManager.Instance.ObjectPool.Get<Enemy>("Enemy");
 
         enemy.InitEnemy(_wayPoints);
     }
