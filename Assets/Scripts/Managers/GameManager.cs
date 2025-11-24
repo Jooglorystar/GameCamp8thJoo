@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private ObjectPool _objectPool;
 
     public ObjectPool ObjectPool => _objectPool;
+    public Commander Commander { get; set; }
+    public bool IsGameOver { get; private set; }
+
     public static GameManager Instance
     {
         get => _instance;
@@ -25,5 +28,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+        IsGameOver = false;
+    }
+
+    public void GameOver()
+    {
+        IsGameOver = true;
+        Time.timeScale = 0f;
+        Debug.Log("Game Over!");
     }
 }

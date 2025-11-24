@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Default_enemyData
   m_EditorClassIdentifier: 
   maxHealth: 5
-  speed: 2
-  attack: 0
+  speed: 5
+  attack: 2
+  attackInterval: 0.8

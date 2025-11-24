@@ -14,6 +14,7 @@ public class UiHealthBar : MonoBehaviour
     public void SetValue(int p_value)
     {
         _maxValue = p_value;
+        RefreshHealthBar(_maxValue);
     }
 
     public void RefreshHealthBar(int p_curValue)
