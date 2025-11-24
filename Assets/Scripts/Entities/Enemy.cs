@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private EnemyData _data;
+    [SerializeField] private UiHealthBar _healthBar;
 
     [SerializeField] private Vector3 _direction;
 
@@ -20,6 +21,10 @@ public class Enemy : MonoBehaviour
         {
             _rb = GetComponent<Rigidbody2D>();
         }
+        if(_healthBar == null)
+        {
+            _healthBar = GetComponentInChildren<UiHealthBar>();
+        }
     }
 
     public void InitEnemy(WayPoint[] p_wayPoints)
@@ -28,6 +33,23 @@ public class Enemy : MonoBehaviour
         _currentWayPointIndex = 0;
         SetWayPoints(p_wayPoints);
         StartCoroutine(OnMove());
+        _healthBar.SetValue(EnemyHealth);
+        _healthBar.RefreshHealthBar(EnemyHealth);
+    }
+
+    public void TakeDamage(int p_damage)
+    {
+        EnemyHealth -= p_damage;
+        _healthBar.RefreshHealthBar(EnemyHealth);
+        if (EnemyHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
     }
 
     private void SetWayPoints(WayPoint[] p_wayPoints)
@@ -48,7 +70,7 @@ public class Enemy : MonoBehaviour
     {
         GoToNextWayPoint();
 
-        while (true)
+        while (_currentWayPointIndex < _totalWayPoints)
         {
             if (Vector3.Distance(transform.position, _wayPoints[_currentWayPointIndex].transform.position) < 0.02f * _data.speed)
             {
@@ -60,7 +82,7 @@ public class Enemy : MonoBehaviour
 
     private void GoToNextWayPoint()
     {
-        if(_currentWayPointIndex<_totalWayPoints-1)
+        if (_currentWayPointIndex < _totalWayPoints - 1)
         {
             transform.position = _wayPoints[_currentWayPointIndex].transform.position;
             _currentWayPointIndex++;
@@ -68,5 +90,14 @@ public class Enemy : MonoBehaviour
 
             Move(direction);
         }
+        else
+        {
+            Move(Vector3.zero);
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }
