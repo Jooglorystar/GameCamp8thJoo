@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
     [SerializeField] private HeroData _data;
 
-    // Gizmo ¼³Á¤
+    // Gizmo ì„¤ì •
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private bool _drawGizmoWhenSelected = true;
 
@@ -39,7 +39,6 @@ public class Hero : MonoBehaviour
     {
         if (_target == null) return;
 
-        // Projectile projectile = Instantiate(_projectile, transform);
         Projectile projectile = GameManager.Instance.ObjectPool.Get<Projectile>("Projectile");
         projectile.Shoot(_data.attack, _data.attackSpeed, transform, _target);
     }
@@ -67,7 +66,7 @@ public class Hero : MonoBehaviour
         return nearest;
     }
 
-    // ¹üÀ§ È®ÀÎ¿ë
+    // ë²”ìœ„ í™•ì¸ìš©
     private void OnDrawGizmosSelected()
     {
         if (!_drawGizmoWhenSelected || _data == null) return;
