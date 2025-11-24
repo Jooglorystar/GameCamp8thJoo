@@ -4,8 +4,6 @@ public class Hero : MonoBehaviour
 {
     [SerializeField] private HeroData _data;
 
-    [SerializeField] private Projectile _projectile;
-
     // Gizmo ¼³Á¤
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private bool _drawGizmoWhenSelected = true;

@@ -42,4 +42,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Debug.Log("Game Over!");
     }
+
+    public void GameClear()
+    {
+        IsGameOver = true;
+        Time.timeScale = 0f;
+        Debug.Log("Game Clear!");
+    }
 }
