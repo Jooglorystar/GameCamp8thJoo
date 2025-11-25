@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public ObjectPool ObjectPool => _objectPool;
     public Commander Commander { get; set; }
+
+    public int RemainEnemyCount { get; set; }
     public bool IsGameOver { get; private set; }
 
     public static GameManager Instance
@@ -43,7 +45,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
-    public void GameClear()
+    public void CheckGameClear()
+    {
+        Debug.Log($"Remaining Enemies: {RemainEnemyCount}");
+        if (RemainEnemyCount <= 0 && !IsGameOver)
+        {
+            GameClear();
+        }
+    }
+
+    private void GameClear()
     {
         IsGameOver = true;
         Time.timeScale = 0f;

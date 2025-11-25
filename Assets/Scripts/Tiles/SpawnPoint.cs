@@ -18,6 +18,7 @@ public class SpawnPoint : MonoBehaviour
     private WaitForSeconds _spawnWait;
 
 
+
     private void Awake()
     {
         _currentWaveIndex = 0;
@@ -33,6 +34,7 @@ public class SpawnPoint : MonoBehaviour
     {
         yield return _waveWait;
 
+        GameManager.Instance.RemainEnemyCount = GetTotalEnemyCountInAllWaves();
         while (_currentWaveIndex < _enemyWaves.Length)
         {
             _isWaveRunning = true;
@@ -56,14 +58,14 @@ public class SpawnPoint : MonoBehaviour
         Debug.Log("All waves completed!");
     }
 
-    private void SpawnTimer()
+    private int GetTotalEnemyCountInAllWaves()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= _spawnInterval)
+        int allEnemyCountInWaves = 0;
+        for (int i = 0; i < _enemyWaves.Length; i++)
         {
-            SpawnEnemy();
-            _timer = 0;
+            allEnemyCountInWaves += _enemyWaves[i].AllEnemyCountInWave;
         }
+        return allEnemyCountInWaves;
     }
 
     private void SpawnEnemy()
@@ -83,5 +85,22 @@ public class EnemyWave
 [System.Serializable]
 public class WaveData
 {
+    private int _allEnemyCount;
+    public int AllEnemyCountInWave
+    {
+        get
+        {
+            if (_allEnemyCount <= 0)
+            {
+                _allEnemyCount = 0;
+                for (int i = 0; i < enemyWaves.Length; i++)
+                {
+                    _allEnemyCount += enemyWaves[i].enemyCount;
+                }
+            }
+            return _allEnemyCount;
+        }
+    }
+
     public EnemyWave[] enemyWaves;
 }

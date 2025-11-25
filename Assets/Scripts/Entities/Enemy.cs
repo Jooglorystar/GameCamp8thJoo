@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         EnemyHealth -= p_damage;
         _healthBar.RefreshHealthBar(EnemyHealth);
-        if (EnemyHealth <= 0)
+        if (IsDead)
         {
             Die();
         }
@@ -76,7 +76,9 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Die()
     {
+        GameManager.Instance.RemainEnemyCount--;
         gameObject.SetActive(false);
+        GameManager.Instance.CheckGameClear();
     }
 
     private void SetWayPoints(WayPoint[] p_wayPoints)
