@@ -32,6 +32,8 @@ public class Projectile : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
+            if(_target.IsDead) return;
+
             _target.TakeDamage(_damage);
             gameObject.SetActive(false);
         }

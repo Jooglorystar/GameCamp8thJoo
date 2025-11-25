@@ -6,7 +6,6 @@ public class Commander : MonoBehaviour, IDamagable
     public int Health { get; private set; }
     public bool IsDead => Health <= 0;
 
-
     private void Awake()
     {
         if (_healthBar == null)
@@ -25,7 +24,6 @@ public class Commander : MonoBehaviour, IDamagable
     {
         Health = 100;
         _healthBar.SetValue(Health);
-
     }
 
     public void TakeDamage(int p_damage)

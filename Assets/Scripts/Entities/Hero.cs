@@ -8,14 +8,28 @@ public class Hero : MonoBehaviour
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private bool _drawGizmoWhenSelected = true;
 
+    private SpriteRenderer _sprite;
+
     private IDamagable _target;
 
     private float _timer;
+
+    private void Awake()
+    {
+        _sprite = GetComponentInChildren<SpriteRenderer>();
+    }
 
     private void Update()
     {
         AttackTimer();
     }
+
+    public void SetHeroData(HeroData p_heroData)
+    {
+        _data = p_heroData;
+        _sprite.color = _data.heroColer;
+    }
+
 
     private void AttackTimer()
     {

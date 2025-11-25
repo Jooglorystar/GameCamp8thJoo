@@ -7,4 +7,5 @@ public class EnemyData : ScriptableObject
     public float speed;
     public int attack;
     public float attackInterval;
+    public int goldReward;
 }

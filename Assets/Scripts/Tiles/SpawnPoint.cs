@@ -6,18 +6,13 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private float _spawnInterval = 0.5f;
     [SerializeField] private float _waveInterval = 15f;
 
-    private float _timer = 0;
-
     [SerializeField] private WaveData[] _enemyWaves;
     [SerializeField] private WayPoint[] _wayPoints;
 
     private int _currentWaveIndex = 0;
-    private bool _isWaveRunning = false;
 
     private WaitForSeconds _waveWait;
     private WaitForSeconds _spawnWait;
-
-
 
     private void Awake()
     {
@@ -37,7 +32,6 @@ public class SpawnPoint : MonoBehaviour
         GameManager.Instance.RemainEnemyCount = GetTotalEnemyCountInAllWaves();
         while (_currentWaveIndex < _enemyWaves.Length)
         {
-            _isWaveRunning = true;
             WaveData wave = _enemyWaves[_currentWaveIndex];
             Debug.Log($"{_currentWaveIndex + 1} Wave starts");
             foreach (EnemyWave enemyWave in wave.enemyWaves)
@@ -48,7 +42,6 @@ public class SpawnPoint : MonoBehaviour
                     yield return _spawnWait;
                 }
             }
-            _isWaveRunning = false;
             Debug.Log($"{_currentWaveIndex + 1} Wave ends");
 
             yield return _waveWait;

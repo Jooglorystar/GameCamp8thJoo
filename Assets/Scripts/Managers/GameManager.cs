@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     public ObjectPool ObjectPool => _objectPool;
     public Commander Commander { get; set; }
 
+    public HeroSpawnManager HeroSpawn { get; set; }
+    public DatabaseManager Database { get; set; }
     public int RemainEnemyCount { get; set; }
     public bool IsGameOver { get; private set; }
+
+    public SpawnableTile SelectedSpawnableTile { get; set; }
 
     public static GameManager Instance
     {
