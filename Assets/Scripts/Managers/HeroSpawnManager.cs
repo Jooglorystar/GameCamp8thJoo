@@ -9,9 +9,10 @@ public class HeroSpawnManager : MonoBehaviour
 
     [SerializeField] private UiTextGold _uiTextGold;
 
+    [SerializeField] private int _startGold;
     private int _gold;
 
-    // public int Gold { get; set; }
+    [SerializeField] private List<int> _heroes;
 
     public int SpawnCost => _spawnCost;
 
@@ -25,7 +26,8 @@ public class HeroSpawnManager : MonoBehaviour
 
     private void Init()
     {
-        _gold = 1000;
+        _gold = _startGold;
+        RefreshGold(0);
         _spawnPanel.gameObject.SetActive(false);
     }
 
@@ -35,11 +37,18 @@ public class HeroSpawnManager : MonoBehaviour
 
         RefreshGold(-_spawnCost);
         Hero hero = GameManager.Instance.ObjectPool.Get<Hero>("Hero");
-        hero.SetHeroData(GameManager.Instance.Database.GetHeroData(11001));
+        hero.SetHeroData(GameManager.Instance.Database.GetLevel1HeroData());
         hero.transform.position = GameManager.Instance.SelectedSpawnableTile.transform.position;
         GameManager.Instance.SelectedSpawnableTile.HasHero = true;
         GameManager.Instance.SelectedSpawnableTile = null;
         _spawnPanel.gameObject.SetActive(false);
+    }
+
+    public void UpGradeHero(Hero p_hero)
+    {
+        if(p_hero == null) return;
+
+        // p_hero.SetHeroData(GameManager.Instance.Database.GetHeroData(12001));
     }
 
     public void RefreshGold(int p_amount)

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private HeroData _data;
-
     // Gizmo 설정
     [SerializeField] private Color _gizmoColor = Color.red;
     [SerializeField] private bool _drawGizmoWhenSelected = true;
+
+    [SerializeField] private HeroData _data;
+    [SerializeField] private Image _upgradeIcon;
 
     private SpriteRenderer _sprite;
 
@@ -14,9 +16,12 @@ public class Hero : MonoBehaviour
 
     private float _timer;
 
+    private bool _canUpgrade;
+
     private void Awake()
     {
         _sprite = GetComponentInChildren<SpriteRenderer>();
+        _upgradeIcon.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -30,6 +35,11 @@ public class Hero : MonoBehaviour
         _sprite.color = _data.heroColer;
     }
 
+
+    public void ActivateUpgradeIcon()
+    {
+        _upgradeIcon.gameObject.SetActive(true);
+    }
 
     private void AttackTimer()
     {
