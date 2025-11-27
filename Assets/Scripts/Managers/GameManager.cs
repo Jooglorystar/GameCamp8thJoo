@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private ObjectPool _objectPool;
+    [SerializeField] private UiGameOver _gameoverPanel;
 
     public ObjectPool ObjectPool => _objectPool;
     public Commander Commander { get; set; }
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
             _objectPool = GetComponent<ObjectPool>();
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -40,7 +40,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         Time.timeScale = 1f;
+        _gameoverPanel.gameObject.SetActive(false);
         IsGameOver = false;
     }
 
@@ -48,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         IsGameOver = true;
         Time.timeScale = 0f;
-        Debug.Log("Game Over!");
+        _gameoverPanel.GameOver();
     }
 
     public void CheckGameClear()
@@ -64,6 +70,6 @@ public class GameManager : MonoBehaviour
     {
         IsGameOver = true;
         Time.timeScale = 0f;
-        Debug.Log("Game Clear!");
+        _gameoverPanel.GameClear();
     }
 }
