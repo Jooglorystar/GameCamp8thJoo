@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UiHeroUpgradePanel : MonoBehaviour
+public class UiFixTilePanel : MonoBehaviour
 {
+    private void Awake()
+    {
+        GameManager.Instance.FixPanel = this;
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -13,7 +17,7 @@ public class UiHeroUpgradePanel : MonoBehaviour
                 return;
 
             gameObject.SetActive(false);
-            GameManager.Instance.SelectedHero = null;
+            GameManager.Instance.SelectedSpawnableTile = null;
         }
     }
 
@@ -25,19 +29,10 @@ public class UiHeroUpgradePanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Upgrade()
+    public void FixTile()
     {
-        if (GameManager.Instance.HeroSpawn.CanUpgradeHero(GameManager.Instance.SelectedHero))
-        {
-            GameManager.Instance.HeroSpawn.UpgradeHero(GameManager.Instance.SelectedHero);
-
-            gameObject.SetActive(false);
-            GameManager.Instance.SelectedHero = null;
-            Debug.Log("Upgrade Success");
-        }
-        else
-        {
-            Debug.Log("Upgrade Fail");
-        }
+        GameManager.Instance.SelectedSpawnableTile.FixTile();
+        gameObject.SetActive(false);
+        GameManager.Instance.SelectedSpawnableTile = null;
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.U2D.Animation;
+using UnityEngine.UIElements;
 
 public class SpawnableTile : MonoBehaviour
 {
@@ -26,16 +27,28 @@ public class SpawnableTile : MonoBehaviour
     {
         if (_isFixed)
         {
-            ActivatePanel(transform.position);
+            ActivateSpawnPanel(transform.position);
+            GameManager.Instance.SelectedSpawnableTile = this;
+        }
+        else
+        {
+            ActivateFixPanel(transform.position);
             GameManager.Instance.SelectedSpawnableTile = this;
         }
     }
 
-    private void ActivatePanel(Vector3 p_position)
+    private void ActivateSpawnPanel(Vector3 p_position)
     {
         if (_hasHero || GameManager.Instance.IsGameOver) return;
 
         GameManager.Instance.HeroSpawn.SpawnPanel.ActivatePanel(p_position);
+    }
+
+    private void ActivateFixPanel(Vector3 p_position)
+    {
+        if (_isFixed) return;
+
+        GameManager.Instance.FixPanel.ActivatePanel(p_position);
     }
 
     public void Spawn()

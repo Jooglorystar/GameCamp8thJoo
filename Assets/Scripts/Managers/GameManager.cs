@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public Hero SelectedHero { get; set; }
 
+    public UiFixTilePanel FixPanel { get; set; }
+
     public static GameManager Instance
     {
         get => _instance;

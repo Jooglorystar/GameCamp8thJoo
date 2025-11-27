@@ -61,7 +61,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8387734122341139891
 MonoBehaviour:
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
   _data: {fileID: 11400000, guid: 8a7bb94fcd0872b47b6c33be1a00d15f, type: 2}
-  _direction: {x: -1, y: 0, z: 0}
+  _healthBar: {fileID: 0}
 --- !u!1 &3825263226560386410
 GameObject:
   m_ObjectHideFlags: 0
