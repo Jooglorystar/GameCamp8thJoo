@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45ae77066443f54d88cd6dd8b2322a7, type: 3}
   m_Name: Default_enemyData
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 50
   speed: 3
   attack: 2
   attackInterval: 0.8

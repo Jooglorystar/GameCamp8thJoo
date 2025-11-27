@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
     private ObjectPool _objectPool;
     [SerializeField] private UiGameOver _gameoverPanel;
 
-    [SerializeField] private UiTextMineral _uiTextMineral;
     [SerializeField] private UiTextGold _uiTextGold;
+    [SerializeField] private UiTextMineral _uiTextMineral;
 
+    [SerializeField] private int _startGold;
+    [SerializeField] private int _startMineral;
     public ObjectPool ObjectPool => _objectPool;
     public Commander Commander { get; set; }
 
@@ -57,6 +59,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         _gameoverPanel.gameObject.SetActive(false);
         IsGameOver = false;
+        Gold = _startGold;
+        RefreshGold(0);
+        Mineral = _startMineral;
+        RefreshMineral(0);
     }
 
     public void GameOver()

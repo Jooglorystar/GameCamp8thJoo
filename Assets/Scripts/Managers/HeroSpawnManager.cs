@@ -35,8 +35,6 @@ public class HeroSpawnManager : MonoBehaviour
     private void Init()
     {
         ResetHeroCounts();
-        GameManager.Instance.Gold = _startGold;
-        GameManager.Instance.RefreshGold(0);
         _spawnPanel.gameObject.SetActive(false);
         _upgradePanel.gameObject.SetActive(false);
     }

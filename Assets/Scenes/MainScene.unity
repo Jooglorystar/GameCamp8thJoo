@@ -2875,6 +2875,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2019224133}
     m_Modifications:
+    - target: {fileID: 396667140898717909, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
+      propertyPath: _isFixed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2351336661775501891, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
       propertyPath: m_Name
       value: Tile_Spawnable
@@ -3307,11 +3311,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771978244}
   m_CullTransparentMesh: 1
---- !u!4 &773093645 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 237471887438883049, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-  m_PrefabInstance: {fileID: 1353990115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781464959
 GameObject:
   m_ObjectHideFlags: 0
@@ -3387,11 +3386,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781464959}
   m_CullTransparentMesh: 1
---- !u!4 &786239226 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7439649979348853438, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-  m_PrefabInstance: {fileID: 1353990115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &811357270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,11 +4210,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924095085}
   m_CullTransparentMesh: 1
---- !u!4 &943978420 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6967438149559649291, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-  m_PrefabInstance: {fileID: 1353990115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949718928
 GameObject:
   m_ObjectHideFlags: 0
@@ -5963,35 +5952,18 @@ PrefabInstance:
       value: MineralManager
       objectReference: {fileID: 0}
     - target: {fileID: 8974141216059622073, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-      propertyPath: _leftBasePos
-      value: 
-      objectReference: {fileID: 786239226}
-    - target: {fileID: 8974141216059622073, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-      propertyPath: _rightBasePos
-      value: 
-      objectReference: {fileID: 773093645}
+      propertyPath: _startMineral
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8974141216059622073, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
       propertyPath: _uiMinerCount
       value: 
       objectReference: {fileID: 1063410478}
-    - target: {fileID: 8974141216059622073, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-      propertyPath: _LeftMineralPos
-      value: 
-      objectReference: {fileID: 1353990116}
-    - target: {fileID: 8974141216059622073, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-      propertyPath: _rightMineralPos
-      value: 
-      objectReference: {fileID: 943978420}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
---- !u!4 &1353990116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1404144099509266854, guid: a61d46b547b46e74a8f2877d6092f726, type: 3}
-  m_PrefabInstance: {fileID: 1353990115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1385101910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6039,10 +6011,13 @@ MonoBehaviour:
   _heroDatas:
   - {fileID: 11400000, guid: 00c1e6b21f5e23a4e979c80589872c5b, type: 2}
   - {fileID: 11400000, guid: fd6ddf95ce32afa4d9351fb28fa4a83b, type: 2}
+  - {fileID: 11400000, guid: 997d5e6bd23f47a488d2866e1321ef48, type: 2}
   - {fileID: 11400000, guid: 52789dea36cff7141abf2caadf5509e2, type: 2}
   - {fileID: 11400000, guid: aa984dee8ccff8d468bd9e4941cf2c33, type: 2}
+  - {fileID: 11400000, guid: 8fbb278ae75b9e84398c585f0ba86cc0, type: 2}
   - {fileID: 11400000, guid: 8bce6df430bee754783201d50dbcb9a0, type: 2}
   - {fileID: 11400000, guid: 9e97fb7793d57ce4895052facd41d5d6, type: 2}
+  - {fileID: 11400000, guid: 4118adb7f27342f4f854921701bade57, type: 2}
   - {fileID: 11400000, guid: 2bdaa2e52232aaa4fa0b02b398042f31, type: 2}
 --- !u!1001 &1397571527
 PrefabInstance:
@@ -7815,6 +7790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2019224133}
     m_Modifications:
+    - target: {fileID: 396667140898717909, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
+      propertyPath: _isFixed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2351336661775501891, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
       propertyPath: m_Name
       value: Tile_Spawnable
@@ -8074,6 +8053,8 @@ MonoBehaviour:
     - enemyCount: 20
   - enemyWaves:
     - enemyCount: 30
+  - enemyWaves:
+    - enemyCount: 40
   _wayPoints:
   - {fileID: 1558073769}
   - {fileID: 2136230954}
@@ -8301,8 +8282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameoverPanel: {fileID: 30909092}
-  _uiTextMineral: {fileID: 1324302255}
   _uiTextGold: {fileID: 13794373}
+  _uiTextMineral: {fileID: 1324302255}
+  _startGold: 500
+  _startMineral: 0
 --- !u!114 &1857672901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8336,6 +8319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2019224133}
     m_Modifications:
+    - target: {fileID: 396667140898717909, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
+      propertyPath: _isFixed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2351336661775501891, guid: 767ba113437f65342afdbf456f59e59e, type: 3}
       propertyPath: m_Name
       value: Tile_Spawnable

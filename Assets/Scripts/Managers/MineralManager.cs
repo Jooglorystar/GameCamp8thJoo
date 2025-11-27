@@ -6,7 +6,6 @@ public class MineralManager : MonoBehaviour
 {
     private List<Miner> _miners;
 
-    [SerializeField] private int _startMineral;
     [SerializeField] private int _baseMinerCost = 49;
     [SerializeField] private int _maxMinerCount = 20;
 
@@ -55,7 +54,6 @@ public class MineralManager : MonoBehaviour
 
     private void Init()
     {
-        GameManager.Instance.RefreshMineral(_startMineral);
         _miners.Clear();
         AddMiner();
         _uiMinerCount.InitInfo(_miners.Count, _maxMinerCount);

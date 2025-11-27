@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84e63097fc7f5d4fb96bc3da352f2ee, type: 3}
   m_Name: 11001_HeroData
   m_EditorClassIdentifier: 
-  heroId: 10001
-  level: 0
-  attack: 1
-  attackInterval: 0.4
-  attackRange: 3
+  heroId: 11001
+  level: 1
+  attack: 20
+  attackInterval: 0.38
+  attackRange: 3.5
   attackSpeed: 10
-  heroColer: {r: 0.78431374, g: 0.78431374, b: 1, a: 1}
+  heroColer: {r: 0.5882353, g: 0.5882353, b: 1, a: 1}
   attackLayer:
     serializedVersion: 2
     m_Bits: 64
