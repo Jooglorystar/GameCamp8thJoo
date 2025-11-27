@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        GameManager.Instance.RemainEnemyCount--;
+        GameManager.Instance.RemainAllEnemyCount--;
         GameManager.Instance.HeroSpawn.RefreshGold(_data.goldReward);
         gameObject.SetActive(false);
         GameManager.Instance.CheckGameClear();

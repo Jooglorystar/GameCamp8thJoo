@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public HeroSpawnManager HeroSpawn { get; set; }
     public DatabaseManager Database { get; set; }
-    public int RemainEnemyCount { get; set; }
+    public int RemainAllEnemyCount { get; set; }
     public bool IsGameOver { get; private set; }
 
     public SpawnableTile SelectedSpawnableTile { get; set; }
@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameClear()
     {
-        Debug.Log($"Remaining Enemies: {RemainEnemyCount}");
-        if (RemainEnemyCount <= 0 && !IsGameOver)
+        Debug.Log($"Remaining Enemies: {RemainAllEnemyCount}");
+        if (RemainAllEnemyCount <= 0 && !IsGameOver)
         {
             GameClear();
         }

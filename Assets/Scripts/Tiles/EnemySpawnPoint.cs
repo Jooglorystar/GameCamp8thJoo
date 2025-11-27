@@ -4,61 +4,96 @@ using UnityEngine;
 public class EnemySpawnPoint : MonoBehaviour
 {
     [SerializeField] private float _spawnInterval = 0.5f;
-    [SerializeField] private float _waveInterval = 15f;
+    [SerializeField] private float _waveInterval = 10f;
 
-    [SerializeField] private WaveData[] _enemyWaves;
+    [SerializeField] private WaveData[] _waves;
     [SerializeField] private WayPoint[] _wayPoints;
 
-    [SerializeField]private Transform _spawnPosition;
-    
-    private int _currentWaveIndex = 0;
+    [SerializeField] private Transform _spawnPosition;
 
-    private WaitForSeconds _waveWait;
-    private WaitForSeconds _spawnWait;
+    private int _currentWaveIndex = 0;
+    private int _spawnedEnemyCount = 0;
+
+    [SerializeField] private UiWaveTimer _uiWaveTimer;
+
+    private float _waveTimer;
+    private float _spawnTimer;
+
+    private bool _spawning;
 
     private void Awake()
     {
         _currentWaveIndex = 0;
-        _waveWait = new WaitForSeconds(_waveInterval);
-        _spawnWait = new WaitForSeconds(_spawnInterval);
+        _uiWaveTimer = GetComponentInChildren<UiWaveTimer>();
+        _uiWaveTimer.gameObject.SetActive(false);
     }
     private void Start()
     {
-        StartCoroutine(WaveCoroutine());
+        _waveTimer = _waveInterval;
+        GameManager.Instance.RemainAllEnemyCount = GetTotalEnemyCountInAllWaves();
     }
 
-    private IEnumerator WaveCoroutine()
+    private void Update()
     {
-        yield return _waveWait;
+        WaveTimer();
+    }
 
-        GameManager.Instance.RemainEnemyCount = GetTotalEnemyCountInAllWaves();
-        while (_currentWaveIndex < _enemyWaves.Length)
+    private void WaveTimer()
+    {
+        if (_currentWaveIndex >= _waves.Length) return;
+
+
+        if (_spawning)
         {
-            WaveData wave = _enemyWaves[_currentWaveIndex];
-            Debug.Log($"{_currentWaveIndex + 1} Wave starts");
-            foreach (EnemyWave enemyWave in wave.enemyWaves)
-            {
-                for (int i = 0; i < enemyWave.enemyCount; i++)
-                {
-                    SpawnEnemy();
-                    yield return _spawnWait;
-                }
-            }
-            Debug.Log($"{_currentWaveIndex + 1} Wave ends");
-
-            yield return _waveWait;
-
-            _currentWaveIndex++;
+            SpawnTimer();
         }
-        Debug.Log("All waves completed!");
+        else
+        {
+            if(_uiWaveTimer.gameObject.activeInHierarchy == false)
+            {
+                _uiWaveTimer.gameObject.SetActive(true);
+            }
+            _waveTimer -= Time.deltaTime;
+            _uiWaveTimer.UpdateTimerUI((_waveTimer / _waveInterval), _waveTimer);
+            if (_waveTimer <= 0f)
+            {
+                _uiWaveTimer.gameObject.SetActive(false);
+                _spawnedEnemyCount = 0;
+                _spawning = true;
+                _spawnTimer = 0;
+                Debug.Log($"Start {_currentWaveIndex} Wave");
+            }
+        }
+    }
+
+    private void SpawnTimer()
+    {
+        if (!_spawning) return;
+
+        _spawnTimer -= Time.deltaTime;
+
+        if (_spawnTimer <= 0f && _spawnedEnemyCount < _waves[_currentWaveIndex].AllEnemyCountInWave)
+        {
+            SpawnEnemy();
+            _spawnedEnemyCount++;
+            _spawnTimer = _spawnInterval;
+        }
+
+        if(_spawnedEnemyCount >= _waves[_currentWaveIndex].AllEnemyCountInWave)
+        {
+            Debug.Log($"{_currentWaveIndex} Wave completed");
+            _spawning = false;
+            _currentWaveIndex++;
+            _waveTimer = _waveInterval;
+        }
     }
 
     private int GetTotalEnemyCountInAllWaves()
     {
         int allEnemyCountInWaves = 0;
-        for (int i = 0; i < _enemyWaves.Length; i++)
+        for (int i = 0; i < _waves.Length; i++)
         {
-            allEnemyCountInWaves += _enemyWaves[i].AllEnemyCountInWave;
+            allEnemyCountInWaves += _waves[i].AllEnemyCountInWave;
         }
         return allEnemyCountInWaves;
     }
