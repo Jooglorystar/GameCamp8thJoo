@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+public class EnemySpawnPoint : MonoBehaviour
 {
     [SerializeField] private float _spawnInterval = 0.5f;
     [SerializeField] private float _waveInterval = 15f;
@@ -9,6 +9,8 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private WaveData[] _enemyWaves;
     [SerializeField] private WayPoint[] _wayPoints;
 
+    [SerializeField]private Transform _spawnPosition;
+    
     private int _currentWaveIndex = 0;
 
     private WaitForSeconds _waveWait;
@@ -64,6 +66,7 @@ public class SpawnPoint : MonoBehaviour
     private void SpawnEnemy()
     {
         Enemy enemy = GameManager.Instance.ObjectPool.Get<Enemy>("Enemy");
+        enemy.transform.position = _spawnPosition.position;
 
         enemy.InitEnemy(_wayPoints);
     }
