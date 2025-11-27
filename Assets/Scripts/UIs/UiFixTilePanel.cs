@@ -12,6 +12,14 @@ public class UiFixTilePanel : MonoBehaviour
     private int _fixCost = 10;
     private int _fixedCount;
 
+    public int FinalFixCost
+    {
+        get
+        {
+            return _baseFixCost + (_fixCost * _fixedCount);
+        }
+    }
+
     private void Awake()
     {
         GameManager.Instance.FixPanel = this;
@@ -36,7 +44,7 @@ public class UiFixTilePanel : MonoBehaviour
 
         Vector2 screenPos = Camera.main.WorldToScreenPoint(p_worldPos);
 
-        _textFixCost.text = GetFixCost().ToString();
+        _textFixCost.text = FinalFixCost.ToString();
         gameObject.transform.position = screenPos;
         gameObject.SetActive(true);
     }
@@ -45,7 +53,7 @@ public class UiFixTilePanel : MonoBehaviour
     {
         if(CanFix())
         {
-            GameManager.Instance.RefreshMineral(-GetFixCost());
+            GameManager.Instance.RefreshMineral(-FinalFixCost);
             GameManager.Instance.SelectedSpawnableTile.FixTile();
             _fixedCount++;
             gameObject.SetActive(false);
@@ -55,15 +63,10 @@ public class UiFixTilePanel : MonoBehaviour
 
     private bool CanFix()
     {
-        if(GameManager.Instance.Mineral >= GetFixCost())
+        if(GameManager.Instance.Mineral >= FinalFixCost)
         {
             return true;
         }
         return false;
-    }
-
-    private int GetFixCost()
-    {
-        return _baseFixCost + (_fixCost * _fixedCount);
     }
 }
