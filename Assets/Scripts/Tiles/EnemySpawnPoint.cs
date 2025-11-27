@@ -15,6 +15,7 @@ public class EnemySpawnPoint : MonoBehaviour
     private int _spawnedEnemyCount = 0;
 
     [SerializeField] private UiWaveTimer _uiWaveTimer;
+    [SerializeField] private UiWaveInfoText _uiWaveInfo;
 
     private float _waveTimer;
     private float _spawnTimer;
@@ -31,6 +32,7 @@ public class EnemySpawnPoint : MonoBehaviour
     {
         _waveTimer = _waveInterval;
         GameManager.Instance.RemainAllEnemyCount = GetTotalEnemyCountInAllWaves();
+        _uiWaveInfo.Init(_currentWaveIndex, _waves.Length);
     }
 
     private void Update()
@@ -57,6 +59,7 @@ public class EnemySpawnPoint : MonoBehaviour
             _uiWaveTimer.UpdateTimerUI((_waveTimer / _waveInterval), _waveTimer);
             if (_waveTimer <= 0f)
             {
+                _uiWaveInfo.RefreshWaveInfo(_currentWaveIndex);
                 _uiWaveTimer.gameObject.SetActive(false);
                 _spawnedEnemyCount = 0;
                 _spawning = true;
