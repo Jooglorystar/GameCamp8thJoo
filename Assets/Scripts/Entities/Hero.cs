@@ -10,13 +10,20 @@ public class Hero : MonoBehaviour
     [SerializeField] private HeroData _data;
     [SerializeField] private Image _upgradeIcon;
 
+    [SerializeField] private Transform _upgradeUiPos;
+
     private SpriteRenderer _sprite;
 
     private IDamagable _target;
 
     private float _timer;
-
     private bool _canUpgrade;
+
+    private SpawnableTile _spawnableTile;
+
+    public SpawnableTile SpawnableTile => _spawnableTile;
+
+    public HeroData Data => _data;
 
     private void Awake()
     {
@@ -29,16 +36,22 @@ public class Hero : MonoBehaviour
         AttackTimer();
     }
 
-    public void SetHeroData(HeroData p_heroData)
+    public void SetHeroData(HeroData p_heroData, SpawnableTile p_spawnableTile)
     {
         _data = p_heroData;
         _sprite.color = _data.heroColer;
+        _spawnableTile = p_spawnableTile;
     }
 
 
-    public void ActivateUpgradeIcon()
+    public void ActivateUpgradeIcon(bool p_canUpgrade)
     {
-        _upgradeIcon.gameObject.SetActive(true);
+        _upgradeIcon.gameObject.SetActive(p_canUpgrade);
+    }
+
+    public void Despawn()
+    {
+        GameManager.Instance.HeroSpawn.DespawnHero(this, _spawnableTile);
     }
 
     private void AttackTimer()
@@ -57,6 +70,12 @@ public class Hero : MonoBehaviour
             Attack();
             _timer = 0f;
         }
+    }
+
+    private void OnMouseUp()
+    {
+        GameManager.Instance.SelectedHero = this;
+        GameManager.Instance.HeroSpawn.UpgradePanel.ActivatePanel(_upgradeUiPos.position);
     }
 
     private void Attack()

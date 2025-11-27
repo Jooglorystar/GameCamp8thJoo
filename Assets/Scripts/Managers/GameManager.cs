@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public SpawnableTile SelectedSpawnableTile { get; set; }
 
+    public Hero SelectedHero { get; set; }
+
     public static GameManager Instance
     {
         get => _instance;
