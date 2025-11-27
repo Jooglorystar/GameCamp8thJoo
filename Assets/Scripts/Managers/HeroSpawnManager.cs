@@ -9,10 +9,7 @@ public class HeroSpawnManager : MonoBehaviour
     [SerializeField] private UiHeroSpawnPanel _spawnPanel;
     [SerializeField] private UiHeroUpgradePanel _upgradePanel;
 
-    [SerializeField] private UiTextGold _uiTextGold;
-
     [SerializeField] private int _startGold;
-    private int _gold;
 
     private Dictionary<int, int> _heroCountPerId;
     private List<Hero> _spawnedHeroes;
@@ -38,17 +35,17 @@ public class HeroSpawnManager : MonoBehaviour
     private void Init()
     {
         ResetHeroCounts();
-        _gold = _startGold;
-        RefreshGold(0);
+        GameManager.Instance.Gold = _startGold;
+        GameManager.Instance.RefreshGold(0);
         _spawnPanel.gameObject.SetActive(false);
         _upgradePanel.gameObject.SetActive(false);
     }
 
     public void SpawnHero()
     {
-        if (_gold < _spawnCost) return;
+        if (GameManager.Instance.Gold < _spawnCost) return;
 
-        RefreshGold(-_spawnCost);
+        GameManager.Instance.RefreshGold(-_spawnCost);
         Hero hero = GameManager.Instance.ObjectPool.Get<Hero>("Hero");
         hero.SetHeroData(GameManager.Instance.Database.GetLevel0HeroData(), GameManager.Instance.SelectedSpawnableTile);
         hero.transform.position = GameManager.Instance.SelectedSpawnableTile.transform.position;
@@ -111,12 +108,6 @@ public class HeroSpawnManager : MonoBehaviour
     public bool CanUpgradeHero(Hero p_hero)
     {
         return _heroCountPerId[p_hero.Data.heroId] >= 2 && p_hero.Data.level < _maxHeroLevel;
-    }
-
-    public void RefreshGold(int p_amount)
-    {
-        _gold += p_amount;
-        _uiTextGold.RefreshText(_gold);
     }
 
     private void ResetHeroCounts()

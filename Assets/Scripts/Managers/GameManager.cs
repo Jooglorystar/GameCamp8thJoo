@@ -7,11 +7,15 @@ public class GameManager : MonoBehaviour
     private ObjectPool _objectPool;
     [SerializeField] private UiGameOver _gameoverPanel;
 
+    [SerializeField] private UiTextMineral _uiTextMineral;
+    [SerializeField] private UiTextGold _uiTextGold;
+
     public ObjectPool ObjectPool => _objectPool;
     public Commander Commander { get; set; }
 
     public HeroSpawnManager HeroSpawn { get; set; }
     public DatabaseManager Database { get; set; }
+    public MineralManager MineralManager { get; set; }
     public int RemainAllEnemyCount { get; set; }
     public bool IsGameOver { get; private set; }
 
@@ -20,6 +24,9 @@ public class GameManager : MonoBehaviour
     public Hero SelectedHero { get; set; }
 
     public UiFixTilePanel FixPanel { get; set; }
+
+    public int Gold { get; set; }
+    public int Mineral { get; set; }
 
     public static GameManager Instance
     {
@@ -66,6 +73,16 @@ public class GameManager : MonoBehaviour
         {
             GameClear();
         }
+    }
+    public void RefreshGold(int p_amount)
+    {
+        Gold += p_amount;
+        _uiTextGold.RefreshText(Gold);
+    }
+    public void RefreshMineral(int p_amount)
+    {
+        Mineral += p_amount;
+        _uiTextMineral.RefreshText(Mineral);
     }
 
     private void GameClear()

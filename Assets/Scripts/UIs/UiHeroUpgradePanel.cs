@@ -19,6 +19,8 @@ public class UiHeroUpgradePanel : MonoBehaviour
 
     public void ActivatePanel(Vector3 p_worldPos)
     {
+        if (GameManager.Instance.IsGameOver) return;
+
         Vector2 screenPos = Camera.main.WorldToScreenPoint(p_worldPos);
 
         gameObject.transform.position = screenPos;
